@@ -1,0 +1,105 @@
+<!--formulario.html-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Titulo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <script src="../js/codigo.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container-fluid">
+            <div class="titulo">
+                <img class="logo" src="../img/logo.png" alt="Logo">
+                <p class= "titulo">MedacDent</p>  <!--Titulo de la pag web-->
+            </div>      
+              </div>
+            <nav><!-- Cabecera -->
+                  <ul>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="citas.html">Ver Citas</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container"></div>
+    <form onsubmit ="return validarFormulario()" class="form" action="" method="POST">
+        <div class="form_container">
+            <h2 class="form_title">Cita</h2>
+            <label for="fecha_cita">Fecha cita:</label><input type="datetime-local" class="form-control" name="fecha"
+                id="fecha" placeholder="Introduce una fecha" required min="2023-10-30" />
+            <h3 class="form_title">Información del paciente</h3>
+            Nombre: <input type="text" class="form_input" name="nombre" id="nombre" placeholder="Nombre:" required>
+            Apellidos: <input type="text" class="form_input" id="apellidos" name="apellidos" placeholder="Apellidos:"
+                required>
+            DNI: <input type="text" class="form_input" id="dni" name="dni" placeholder="Introduzca su DNI"
+                pattern="[0-9]{8}[A-Za-z]{1}" title="Debe tener 8 numero y una letra" minlength="0" maxlength="9">
+            email: <input type="text" class="form_input" id="email" name="email" placeholder="Introduzca su email"
+                pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Email no valido">
+            Teléfono: <input type="text" class="form_input" name="telefono" id="telefono"
+                placeholder="Introduzca su teléfono" pattern="[0-9]{9}" title="Debe tener 9 números" minlength="0"
+                maxlength="9">
+            Fecha nacimiento: <input type="date" class="form_input" id="fechaNacimiento" name="fechaNacimiento"
+                value="2017-06-01" required>
+            Observaciones <textarea class="form_input form_input--message" name="observaciones" id="observaciones"
+                placeholder="Observaciones:"></textarea>
+            <input type="submit" value="Enviar" class="form_cta" >
+        </div>
+    </form>
+    <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4">
+                    <p>Visítanos en:</p>
+                    <a href="https://es-es.facebook.com/EnviosGENEI/" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="https://twitter.com/GENEI_ES?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
+                        target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+
+                    <a href="https://www.instagram.com/genei.es/" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <div class="col-4">
+                    <p class="pPie">Contacta con nosotros</p>
+                    <p>Blog</p>
+                    <p>Quiénes somos</p>
+                </div>
+                <div class="col-4">Términos y condiciones</div>
+            </div>
+        </div>
+    </footer>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Obtener los parámetros de la URL
+    var urlParams = new URLSearchParams(window.location.search);
+
+    // Obtener el índice de la cita de la URL
+    var index = urlParams.get('index');
+
+    if (index !== null) {
+        // Obtener la cita correspondiente al índice
+        var citaAModificar = citas[parseInt(index)];
+
+        // Llenar los campos del formulario con los datos de la cita
+        document.getElementById('fecha').value = citaAModificar.fecha;
+        document.getElementById('nombre').value = citaAModificar.nombre;
+        document.getElementById('apellidos').value = citaAModificar.apellidos;
+        document.getElementById('dni').value = citaAModificar.dni;
+        document.getElementById('email').value = citaAModificar.email;
+        document.getElementById('telefono').value = citaAModificar.telefono;
+        document.getElementById('fechaNacimiento').value = citaAModificar.fechaNacimiento;
+        document.getElementById('observaciones').value = citaAModificar.observaciones;
+    }
+});
+    </script>
+</body>
+</html>
